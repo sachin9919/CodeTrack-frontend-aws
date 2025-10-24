@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from "../../api/axiosConfig";
 import { useAuth } from "../../authContext";
 import { Box, Button, Heading } from "@primer/react";
 import "./auth.css";
@@ -21,7 +22,8 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:3000/api/user/signup", {
+      // CORRECTION: Use imported 'api' instance with relative path
+      const res = await api.post("/user/signup", {
         email: email,
         password: password,
         username: username,
@@ -29,7 +31,6 @@ const Signup = () => {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.userId);
-      // FIX: Save the (default empty) avatarUrl to localStorage
       localStorage.setItem("avatarUrl", res.data.avatarUrl || '');
 
       setCurrentUser(res.data.userId);

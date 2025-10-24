@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from "../../api/axiosConfig";
 import { useAuth } from "../../authContext";
 import { Box, Button, Heading } from "@primer/react";
 import "./auth.css";
@@ -20,8 +21,8 @@ const Login = () => {
 
     try {
       setLoading(true);
-      // FIX 1: Corrected API endpoint
-      const res = await axios.post("http://localhost:3000/api/user/login", {
+      // CORRECTION: Use imported 'api' instance with relative path
+      const res = await api.post("/user/login", {
         email: email,
         password: password,
       });
@@ -29,7 +30,6 @@ const Login = () => {
       // Set items from response
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.userId);
-      // FIX 2: Save the avatarUrl to localStorage
       localStorage.setItem("avatarUrl", res.data.avatarUrl || ''); // Save avatarUrl
 
       setCurrentUser(res.data.userId); // Update context
@@ -38,7 +38,7 @@ const Login = () => {
       navigate("/"); // Use navigate to redirect
     } catch (err) {
       console.error(err);
-      // FIX 3: Set specific error message
+      // Set specific error message
       setError(err.response?.data?.message || "Login Failed!");
       setLoading(false);
     }
@@ -56,7 +56,7 @@ const Login = () => {
           </Box>
         </div>
         <div className="login-box">
-          {/* FIX 4: Display error message */}
+          {/* Display error message */}
           {error && <p className="error-message">{error}</p>}
           <div>
             <label className="label">Email address</label>

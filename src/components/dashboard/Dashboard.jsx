@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from "../../api/axiosConfig";
 import "./dashboard.css";
 import AnalogClock from "./AnalogClock";
 import { RepoIcon } from '@primer/octicons-react'; // Import RepoIcon
@@ -26,7 +27,8 @@ const Dashboard = () => {
       if (!userId) { setIsLoading(false); setRepositories([]); return; }
       setIsLoading(true);
       try {
-        const response = await axios.get(`http://localhost:3000/api/repo/user/${userId}`, config);
+        // CORRECTION: Use imported 'api' instance with relative path
+        const response = await api.get(`/repo/user/${userId}`, config);
         setRepositories(response.data.repositories || []);
       } catch (err) {
         console.error("Error fetching user repositories:", err); setRepositories([]);
@@ -35,7 +37,8 @@ const Dashboard = () => {
 
     const fetchSuggestedRepositories = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/repo/public", config);
+        // CORRECTION: Use imported 'api' instance with relative path
+        const response = await api.get("/repo/public", config);
         setSuggestedRepositories(response.data || []);
       } catch (err) { console.error("Error fetching suggested repositories:", err); setSuggestedRepositories([]); }
     };
@@ -43,7 +46,8 @@ const Dashboard = () => {
     const fetchEvents = async () => {
       setEventsLoading(true); setEventsError('');
       try {
-        const response = await axios.get("http://localhost:3000/api/events/upcoming", config);
+        // CORRECTION: Use imported 'api' instance with relative path
+        const response = await api.get("/events/upcoming", config);
         setEvents(response.data || []);
       } catch (err) {
         console.error("Error fetching upcoming events:", err); setEventsError("Could not load events."); setEvents([]);
