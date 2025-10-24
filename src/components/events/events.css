@@ -1,0 +1,132 @@
+/* Styles for CreateEvent.jsx */
+.event-form-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.event-form {
+    background-color: #161b22;
+    padding: 30px 40px;
+    /* Match settings form padding */
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    /* Consistent max width */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Consistent gap */
+}
+
+.event-form h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 22px;
+    color: #e6edf3;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 15px;
+}
+
+.form-group {
+    /* Reusing form-group class */
+    margin-bottom: 0;
+    /* Let gap handle spacing */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #c9d1d9;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"] {
+    /* Style date input similarly */
+    width: 100%;
+    padding: 10px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 14px;
+    box-sizing: border-box;
+    color-scheme: dark;
+    /* Helps date picker appearance in dark mode */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+}
+
+/* Form Button */
+.event-form button[type="submit"] {
+    margin-top: 10px;
+    /* Add margin above button */
+    padding: 10px 16px;
+    /* --- Green Gradient --- */
+    background-image: linear-gradient(180deg, hsla(130, 40%, 95%, .1), hsla(130, 40%, 95%, 0));
+    background-color: #238636;
+    color: white;
+    border: 1px solid rgba(240, 246, 252, 0.1);
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    /* Make button full width */
+    /* transition inherited from index.css */
+}
+
+.event-form button[type="submit"]:hover {
+    background-color: #2ea043;
+    background-image: none;
+    border-color: rgba(240, 246, 252, 0.1);
+    filter: none;
+}
+
+.event-form button[type="submit"]:active {
+    background-color: #238636;
+    background-image: none;
+    filter: brightness(0.9);
+    transform: scale(0.98);
+}
+
+.event-form button[type="submit"]:disabled {
+    /* Inherits disabled style */
+    background-color: #21262d;
+    border-color: #30363d;
+}
+
+/* Error/Success Messages */
+.form-message {
+    /* Common style for messages */
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.form-message.success {
+    color: #3fb950;
+    background-color: rgba(63, 185, 80, 0.1);
+    border-color: rgba(63, 185, 80, 0.3);
+}
+
+.form-message.error {
+    color: #f85149;
+    background-color: rgba(218, 54, 51, 0.1);
+    border-color: rgba(218, 54, 51, 0.3);
+}

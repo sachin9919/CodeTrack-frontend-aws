@@ -1,0 +1,177 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  /* Base background, overridden by body */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #58a6ff;
+  /* Use consistent blue */
+  text-decoration: none;
+  /* Remove default underline */
+}
+
+a:hover {
+  color: #79c0ff;
+  /* Lighter blue on hover */
+  text-decoration: underline;
+  /* Add underline on hover */
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0d1117;
+  /* GitHub dark background */
+  color: #c9d1d9;
+  /* Default text color */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* GitHub font stack */
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+  /* enables scroll if needed */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #e6edf3;
+  /* Brighter white for headings */
+}
+
+
+/* --- Base Button Styles --- */
+button {
+  border-radius: 6px;
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  /* Subtle border */
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  /* --- Added Subtle Gradient --- */
+  background-image: linear-gradient(180deg, hsla(210, 8%, 95%, .05), hsla(210, 8%, 95%, 0));
+  background-color: #21262d;
+  /* GitHub button background */
+  color: #c9d1d9;
+  /* GitHub button text */
+  cursor: pointer;
+  /* --- Added Transitions --- */
+  transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out, transform 0.1s ease-in-out, filter 0.15s ease-in-out;
+}
+
+button:hover {
+  border-color: #8b949e;
+  /* GitHub button hover border */
+  background-color: #30363d;
+  /* GitHub button hover background */
+  /* Remove gradient on hover for flatter look */
+  background-image: none;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid #58a6ff;
+  /* Blue outline */
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+  /* Blue glow */
+}
+
+/* --- Added Active State --- */
+button:active {
+  transform: scale(0.98);
+  /* Slightly shrink on click */
+  background-color: #21262d;
+  /* Go back to base color briefly */
+  background-image: none;
+  /* Ensure flat color */
+  filter: brightness(0.9);
+  /* Slightly darken on click */
+}
+
+/* --- Disabled State --- */
+button:disabled,
+button.disabled-button {
+  /* Added .disabled-button class */
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #21262d;
+  /* Keep base background */
+  border-color: #30363d;
+  /* Keep base border */
+  background-image: none;
+  /* Ensure flat color */
+  filter: grayscale(30%);
+  /* Optional: slightly desaturate */
+}
+
+/* --- Loading Spinner --- */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  /* Add some space around the spinner */
+  min-height: 150px;
+  /* Give it some minimum height */
+}
+
+.spinner {
+  border: 4px solid rgba(139, 148, 158, 0.3);
+  /* Lighter grey border */
+  border-left-color: #58a6ff;
+  /* Blue accent color for spinner */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+/* Smaller spinner for sidebars or lists */
+.spinner.small {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optional: Placeholder for page-level loading */
+.page-loading-overlay {
+  position: fixed;
+  /* Or absolute if within a specific container */
+  inset: 0;
+  background-color: rgba(13, 17, 23, 0.8);
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  /* Ensure it's on top */
+}

@@ -1,0 +1,110 @@
+.right-sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #161b22;
+    color: white;
+    position: fixed;
+    top: 0;
+    /* Explicitly define starting position */
+    right: -260px;
+    /* Ensure transition is defined */
+    transition: right 0.3s ease-in-out;
+    /* Changed timing function slightly */
+    padding: 20px;
+    z-index: 1001;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    /* Add shadow for depth */
+    overflow-y: auto;
+    /* Allow scrolling */
+}
+
+.right-sidebar.open {
+    /* Explicitly define ending position */
+    right: 0;
+}
+
+.right-sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    /* Position close button consistently */
+    right: 15px;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.right-sidebar .close-btn:hover {
+    transform: rotate(90deg);
+    opacity: 0.8;
+}
+
+.right-sidebar h3 {
+    margin-top: 5px;
+    /* Adjust spacing */
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    /* Add padding below heading */
+    border-bottom: 1px solid #30363d;
+    /* Separator line */
+    padding-right: 25px;
+    /* Space before close button */
+}
+
+.right-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* Remove default margin */
+}
+
+.right-sidebar ul li {
+    /* Remove default margin if any */
+    margin: 0;
+}
+
+.right-sidebar ul li a {
+    display: block;
+    /* Make link fill width */
+    text-decoration: none;
+    color: #c9d1d9;
+    /* Lighter grey for links */
+    transition: color 0.2s, background-color 0.2s;
+    padding: 10px 5px;
+    /* Consistent padding */
+    border-radius: 4px;
+    /* Slightly rounded hover */
+    margin-bottom: 2px;
+    /* Small space between links */
+}
+
+.right-sidebar ul li a:hover {
+    color: #ffffff;
+    /* White text on hover */
+    background-color: #30363d;
+    /* Darker background on hover */
+}
+
+.right-sidebar ul li a.active {
+    color: #58a6ff;
+    /* GitHub blue for active */
+    font-weight: bold;
+    background-color: rgba(88, 166, 255, 0.1);
+    /* Subtle blue background for active */
+}
+
+.right-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Slightly darker backdrop */
+    z-index: 1000;
+    /* Add fade-in for backdrop */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Style for when backdrop should fade out (needs JS toggle or parent class) */
+/* .right-sidebar-backdrop.closing { opacity: 0; } */

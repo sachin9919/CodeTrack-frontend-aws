@@ -1,0 +1,120 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #161b22;
+    color: white;
+    position: fixed;
+    top: 0;
+    /* Explicitly define starting position */
+    left: -260px;
+    /* Ensure transition is defined */
+    transition: left 0.3s ease-in-out;
+    /* Changed timing function slightly */
+    padding: 20px;
+    z-index: 1001;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    /* Add shadow for depth */
+    overflow-y: auto;
+    /* Allow scrolling if content is long */
+}
+
+.sidebar.open {
+    /* Explicitly define ending position */
+    left: 0;
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.sidebar .close-btn:hover {
+    transform: rotate(90deg);
+    opacity: 0.8;
+}
+
+.sidebar-user {
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-right: 25px;
+    /* Space before close button */
+    border-bottom: 1px solid #30363d;
+    /* Separator line */
+    padding-bottom: 15px;
+}
+
+.sidebar-search input {
+    width: 100%;
+    padding: 8px 10px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    /* Changed from outline */
+    color: white;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.sidebar-search input:focus {
+    outline: none;
+    border-color: #58a6ff;
+    /* Highlight on focus */
+}
+
+
+.sidebar-links a {
+    display: block;
+    color: #c9d1d9;
+    /* Lighter grey for links */
+    padding: 10px 5px;
+    /* Adjusted padding */
+    text-decoration: none;
+    transition: color 0.2s, background-color 0.2s;
+    /* Added background transition */
+    border-radius: 4px;
+    /* Slightly rounded hover */
+    margin-bottom: 2px;
+    /* Small space between links */
+}
+
+.sidebar-links a:hover {
+    color: #ffffff;
+    /* White text on hover */
+    background-color: #30363d;
+    /* Darker background on hover */
+}
+
+.sidebar-links a.active {
+    color: #58a6ff;
+    /* GitHub blue for active */
+    font-weight: bold;
+    background-color: rgba(88, 166, 255, 0.1);
+    /* Subtle blue background for active */
+}
+
+.sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Slightly darker backdrop */
+    z-index: 1000;
+    /* Add fade-in for backdrop */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Style for when backdrop should fade out (needs JS toggle or parent class) */
+/* .sidebar-backdrop.closing { opacity: 0; } */
+
+
+.no-results {
+    color: #8b949e;
+    font-size: 14px;
+    padding: 10px 5px;
+}

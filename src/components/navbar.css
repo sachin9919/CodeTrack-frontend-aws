@@ -1,0 +1,262 @@
+/* Navbar Base */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161b22;
+    padding: 10px 20px;
+    border-bottom: 1px solid #30363d;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* --- Keyframe Animations --- */
+/* Blinking/Pulsing for the 'Create New' icon (Plus) */
+@keyframes pulse-color {
+    0% {
+        color: #007bff;
+    }
+
+    50% {
+        color: #58a6ff;
+    }
+
+    100% {
+        color: #007bff;
+    }
+}
+
+/* Left Section */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hamburger-icon {
+    background: none;
+    border: none;
+    padding: 5px;
+    color: #c9d1d9;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.hamburger-icon:hover {
+    background-color: #30363d;
+    border-radius: 6px;
+    color: white;
+}
+
+.hamburger-icon:active {
+    background-color: #21262d;
+    transform: scale(0.95);
+}
+
+.logo-link svg.main-logo-icon {
+    color: #c9d1d9;
+    vertical-align: middle;
+    transition: color 0.2s ease-in-out, transform 0.3s ease;
+}
+
+.logo-link:hover svg.main-logo-icon {
+    color: white;
+    transform: scale(1.1);
+    /* Slight enlargement on hover */
+}
+
+
+/* Search Section */
+.nav-search input {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    width: 250px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.nav-search input::placeholder {
+    color: #8b949e;
+}
+
+.nav-search input:focus {
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+}
+
+/* Right Section */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* General Icons in Nav Right (Bell, Plus, Right Sidebar Toggle) */
+.nav-right>button.nav-icon {
+    background: none;
+    border: none;
+    color: #c9d1d9;
+    padding: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    line-height: 1;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.nav-right>button.nav-icon:hover {
+    background-color: #30363d;
+    color: white;
+    transform: translateY(-2px);
+    /* Slight lift on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-right>button.nav-icon:active {
+    background-color: #21262d;
+    transform: scale(0.95);
+    box-shadow: none;
+}
+
+/* --- Specific Aesthetic Enhancements for Icons --- */
+.nav-right>button.plus-icon {
+    /* Initial style for plus icon */
+    color: #007bff;
+    animation: pulse-color 3s infinite ease-in-out;
+    /* Blinking/pulsing color */
+}
+
+.nav-right>button.plus-icon:hover {
+    color: white;
+    /* Stop blinking on hover, make it pure white */
+    animation: none;
+    background-color: #007bff;
+    /* Background accent for Plus icon */
+}
+
+/* --- End Aesthetic Enhancements --- */
+
+
+/* Profile Avatar Button */
+.profile-menu-container {
+    position: relative;
+}
+
+.profile-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+    border-radius: 50%;
+    display: flex;
+    transition: transform 0.2s;
+}
+
+.profile-icon-button:hover {
+    transform: scale(1.05);
+    /* Enhance avatar button hover */
+}
+
+.nav-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #58a6ff;
+    /* A blue ring for aesthetic */
+    display: block;
+    object-fit: cover;
+    transition: border-color 0.2s;
+}
+
+.profile-icon-button:hover .nav-avatar {
+    border-color: white;
+    /* Ring turns white on hover */
+    opacity: 0.9;
+}
+
+.profile-icon-placeholder {
+    background-color: #30363d;
+}
+
+/* Profile Dropdown Menu */
+.profile-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    min-width: 180px;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+    pointer-events: none;
+}
+
+/* Show dropdown when isDropdownOpen state is true */
+.profile-menu-container .profile-dropdown-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.profile-dropdown-menu a,
+.profile-dropdown-menu button {
+    color: #c9d1d9;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    width: 100%;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.profile-dropdown-menu a:hover,
+.profile-dropdown-menu button:hover {
+    background-color: #30363d;
+    color: white;
+}
+
+/* Specific style for logout button hover */
+.profile-dropdown-menu button.logout-button:hover {
+    background-color: #b62324;
+    color: white;
+}
+
+/* Active state for dropdown items */
+.profile-dropdown-menu a:active,
+.profile-dropdown-menu button:active {
+    filter: brightness(0.9);
+}
+
+/* Navbar Date Display */
+.navbar-date {
+    color: #c9d1d9;
+    font-size: 14px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.navbar-date svg {
+    vertical-align: middle;
+}

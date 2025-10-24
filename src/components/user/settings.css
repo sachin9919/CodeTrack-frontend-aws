@@ -1,0 +1,242 @@
+.settings-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 20px;
+    /* Add horizontal padding */
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    /* Adjust based on navbar */
+    color: #c9d1d9;
+    /* Lighter text */
+    box-sizing: border-box;
+    /* Include padding */
+}
+
+.settings-form-wrapper {
+    background-color: #161b22;
+    /* Match other panels */
+    padding: 30px 40px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    /* Consistent border */
+    width: 100%;
+    max-width: 500px;
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); */
+    /* Remove shadow if desired */
+}
+
+.settings-form-wrapper h2 {
+    text-align: center;
+    margin-top: 0;
+    /* Remove default margin */
+    margin-bottom: 25px;
+    font-size: 22px;
+    /* Slightly smaller */
+    color: #e6edf3;
+    /* Brighter white */
+    border-bottom: 1px solid #30363d;
+    /* Separator */
+    padding-bottom: 15px;
+}
+
+.avatar-preview {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.avatar-preview img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #30363d;
+    /* Consistent border */
+    object-fit: cover;
+}
+
+.profile-image-placeholder {
+    /* For settings page */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #30363d;
+    margin: 0 auto;
+    /* Center placeholder */
+    border: 2px solid #30363d;
+}
+
+.username-display {
+    text-align: center;
+    margin-top: -10px;
+    /* Pull username closer to avatar */
+    margin-bottom: 25px;
+    color: #8b949e;
+    /* Grey text */
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    /* Slightly smaller label */
+    color: #c9d1d9;
+    /* Lighter label */
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #0d1117;
+    /* Darker input */
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 14px;
+    /* Match label size */
+    box-sizing: border-box;
+}
+
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+}
+
+.form-group input:disabled {
+    background-color: #21262d;
+    /* Slightly lighter disabled background */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* File input styling */
+.form-group input[type="file"] {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    /* Remove padding */
+    color: #8b949e;
+    /* Dimmer text */
+    font-size: 14px;
+    /* Match other inputs */
+    width: 100%;
+    /* Ensure it takes full width */
+}
+
+.form-group input[type="file"]::file-selector-button {
+    padding: 6px 12px;
+    margin-right: 10px;
+    background-color: #21262d;
+    /* Standard button background */
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    cursor: pointer;
+    /* transition: background-color 0.2s; */
+    /* Transition inherited from base */
+    font-size: 12px;
+    /* Smaller button text */
+    font-weight: 500;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+    filter: none;
+    /* Override base */
+}
+
+.file-name-display {
+    display: inline-block;
+    /* Keep inline */
+    margin-left: 10px;
+    font-size: 12px;
+    color: #8b949e;
+    font-style: italic;
+    /* Prevent wrapping */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 150px);
+    /* Adjust based on button width */
+    vertical-align: middle;
+}
+
+/* Save Button */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px 16px;
+    /* Adjusted padding */
+    background-color: #238636;
+    /* Green */
+    color: white;
+    border: 1px solid rgba(240, 246, 252, 0.1);
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    /* Standard weight */
+    cursor: pointer;
+    /* transition inherited */
+    margin-top: 10px;
+    /* Add margin */
+}
+
+button[type="submit"]:hover {
+    background-color: #2ea043;
+    /* Lighter green */
+    border-color: rgba(240, 246, 252, 0.1);
+    filter: none;
+}
+
+button[type="submit"]:active {
+    background-color: #238636;
+    filter: brightness(0.9);
+    transform: scale(0.98);
+}
+
+button[type="submit"]:disabled {
+    /* Inherits disabled style from index.css */
+    background-color: #21262d;
+    /* Ensure consistent disabled background */
+    border-color: #30363d;
+}
+
+.success-message {
+    color: #3fb950;
+    /* Brighter green */
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 500;
+    /* Standard weight */
+    font-size: 14px;
+    /* Consistent size */
+    background-color: rgba(63, 185, 80, 0.1);
+    /* Faint green background */
+    border: 1px solid rgba(63, 185, 80, 0.3);
+    /* Dim green border */
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.error-message {
+    color: #f85149;
+    /* Red */
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: rgba(218, 54, 51, 0.1);
+    /* Faint red background */
+    border: 1px solid rgba(218, 54, 51, 0.3);
+    /* Dim red border */
+    padding: 10px;
+    border-radius: 6px;
+}

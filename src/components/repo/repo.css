@@ -1,0 +1,468 @@
+/* --- Repo Form (Existing Styles Kept) --- */
+.repo-form-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.repo-form {
+    background-color: #161b22;
+    padding: 30px;
+    border-radius: 8px;
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.repo-form h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.repo-form label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #c9d1d9;
+}
+
+.repo-form input[type="text"],
+.repo-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background-color: #0d1117;
+    color: white;
+    box-sizing: border-box;
+}
+
+.repo-form input[type="text"]:focus,
+.repo-form textarea:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+}
+
+.repo-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #c9d1d9;
+}
+
+.checkbox-row input[type="checkbox"] {
+    accent-color: #58a6ff;
+}
+
+
+/* --- General Action Button Base Styles (NEW) --- */
+/* This base applies to all buttons inside RepoDetails.jsx with the action-button prefix */
+.primary-action-button,
+.secondary-action-button,
+.delete-button,
+.repo-form button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    /* Reset styles from old repo-form button */
+    background-image: none !important;
+    filter: none !important;
+}
+
+/* Primary Button Style (e.g., Commit, Save) */
+.primary-action-button,
+.repo-form button {
+    background-color: #238636;
+    /* GitHub green */
+    color: white;
+    border: 1px solid #238636;
+    box-shadow: 0 1px 0 rgba(27, 31, 35, 0.1);
+}
+
+.primary-action-button:hover,
+.repo-form button:hover {
+    background-color: #2ea043;
+    border-color: #2ea043;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(46, 160, 67, 0.3);
+}
+
+/* Secondary Button Style (e.g., Push, Pull, Issues, Toggle Visibility) */
+.secondary-action-button {
+    background-color: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+}
+
+.secondary-action-button:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Delete Button Style (Warning) */
+.delete-button {
+    background-color: #b62324;
+    /* Red color */
+    color: white;
+    border: 1px solid #b62324;
+}
+
+.delete-button:hover {
+    background-color: #da3633;
+    border-color: #da3633;
+    transform: scale(1.02);
+}
+
+/* Disabled Button Style */
+.disabled-button,
+.primary-action-button:disabled,
+.secondary-action-button:disabled,
+.delete-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.primary-action-button:active,
+.secondary-action-button:active,
+.delete-button:active,
+.repo-form button:active {
+    transform: scale(0.98);
+}
+
+/* --- End General Action Button Styles --- */
+
+
+/* --- Repo Details Page (Adjusted Styles) --- */
+.repo-details-page {
+    padding: 20px 40px;
+    /* Increased padding */
+    color: #c9d1d9;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #0d1117;
+    /* Set background to main content color */
+    min-height: 100vh;
+}
+
+.repo-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 15px;
+}
+
+.repo-header h2 {
+    color: #58a6ff;
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.repo-description-text {
+    color: #8b949e;
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    flex-basis: 100%;
+}
+
+.repo-header textarea {
+    /* Description Textarea */
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background-color: #161b22;
+    /* Slightly different background for text area */
+    color: white;
+    resize: vertical;
+    min-height: 60px;
+    margin-top: 5px;
+}
+
+/* Buttons within header (Edit/Save/Cancel) */
+.repo-header .primary-action-button,
+.repo-header .secondary-action-button {
+    padding: 5px 12px;
+    /* Smaller padding for inline header buttons */
+    font-size: 12px;
+    /* Smaller text */
+}
+
+.repo-header .edit-desc {
+    margin-left: auto;
+    /* Push Edit button to the right */
+}
+
+.repo-header .cancel-desc {
+    /* No margin-left needed when not auto-pushed */
+    margin-right: 0;
+}
+
+/* Star Button */
+.star-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 20px;
+    /* Aesthetic pill shape */
+    cursor: pointer;
+}
+
+.star-button svg {
+    fill: #c9d1d9;
+    /* Default star color */
+    transition: fill 0.2s;
+}
+
+.star-button:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+}
+
+.star-button.starred {
+    background-color: #58a6ff;
+    color: #161b22;
+    border-color: #58a6ff;
+    font-weight: 600;
+}
+
+.star-button.starred svg {
+    fill: #161b22;
+}
+
+.star-button.starred:hover {
+    background-color: #79c0ff;
+    border-color: #79c0ff;
+}
+
+
+.repo-meta {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #8b949e;
+    border: 1px solid #161b22;
+    /* subtle container */
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.repo-meta p {
+    margin: 5px 0;
+}
+
+.repo-meta strong {
+    color: #c9d1d9;
+    margin-right: 5px;
+}
+
+.visibility-status.public {
+    color: #2ea043;
+    /* Green for Public */
+    font-weight: 600;
+}
+
+.visibility-status.private {
+    color: #f08047;
+    /* Orange for Private */
+    font-weight: 600;
+}
+
+.repo-meta .toggle-visibility-btn {
+    /* Inherits secondary-action-button styles */
+    padding: 5px 12px;
+    font-size: 12px;
+    margin-left: 15px;
+    /* Space it from text */
+}
+
+.owner-link {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.owner-link:hover {
+    text-decoration: underline;
+}
+
+/* Latest Content / Commit History */
+.repo-latest-content,
+.repo-content {
+    margin-top: 20px;
+    border-top: 1px solid #30363d;
+    padding-top: 15px;
+}
+
+.repo-latest-content h3,
+.repo-content h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #c9d1d9;
+    font-weight: 600;
+}
+
+.content-display {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 16px;
+    color: #c9d1d9;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 13px;
+}
+
+.no-content-message {
+    color: #8b949e;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.repo-content ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.repo-content li {
+    color: #c9d1d9;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+
+/* --- Action Buttons (Commit, Push, Pull, Issues, Delete) --- */
+.repo-actions {
+    margin-top: 25px;
+    border-top: 1px solid #30363d;
+    padding-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* Allow wrapping */
+}
+
+/* Delete button pushes to the right */
+.repo-actions .delete-button {
+    margin-left: auto;
+}
+
+/* --- Shared Action Page Styles (Commit, Push, Pull, Issues) --- */
+.repo-action-page {
+    padding: 30px 40px;
+    color: #c9d1d9;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #161b22;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+}
+
+.repo-action-page h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 10px;
+}
+
+.repo-action-page textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #0d1117;
+    color: white;
+    border: 1px solid #30363d;
+    resize: vertical;
+    margin-bottom: 15px;
+    font-size: 14px;
+    min-height: 100px;
+    box-sizing: border-box;
+}
+
+.repo-action-page textarea:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+}
+
+/* Button on action pages (Commit, Push, Pull, Create Issue) - uses the primary style */
+.repo-action-page button {
+    /* Inherits primary-action-button style */
+    background-color: #238636;
+    color: white;
+    border: 1px solid #238636;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.repo-action-page button:hover {
+    background-color: #2ea043;
+    border-color: #2ea043;
+}
+
+.action-error {
+    color: #f85149;
+    background-color: rgba(218, 54, 51, 0.1);
+    border: 1px solid rgba(218, 54, 51, 0.3);
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Issues List Specific */
+.repo-action-page ul {
+    list-style: none;
+    padding: 0;
+}
+
+.repo-action-page li {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.repo-action-page li p {
+    margin: 0 0 5px 0;
+    color: #c9d1d9;
+}
+
+.repo-action-page li small {
+    color: #8b949e;
+    font-size: 12px;
+}

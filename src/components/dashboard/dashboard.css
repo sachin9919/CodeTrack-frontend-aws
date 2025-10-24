@@ -1,0 +1,447 @@
+#dashboard {
+    display: flex;
+    /* justify-content: space-between; */
+    /* Use gap instead */
+    align-items: flex-start;
+    background-color: #0d1117;
+    /* Base page background */
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+    flex-grow: 1;
+    min-height: calc(100vh - 60px);
+    /* Adjust based on navbar height */
+    box-sizing: border-box;
+}
+
+/* --- Panel Styling --- */
+aside,
+/* Left & Right Panels */
+main {
+    /* Main Content Panel */
+    background-color: #161b22;
+    /* Slightly lighter panel background */
+    border: 1px solid #30363d;
+    /* Keep border for definition */
+    border-radius: 8px;
+    padding: 20px;
+    /* Consistent padding */
+    color: #c9d1d9;
+    /* Lighter text */
+    /* Removed height/max-height, let content define it */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.2);
+    /* Add subtle shadow to panels */
+}
+
+.left-panel,
+.right-panel {
+    flex: 0 0 250px;
+    /* Fixed width, don't grow or shrink */
+    /* max-width: 250px; /* Redundant with flex-basis */
+}
+
+/* Style panel headings */
+.left-panel h3,
+.right-panel h3 {
+    font-size: 16px;
+    /* Smaller headings */
+    font-weight: 600;
+    color: #8b949e;
+    /* Grey headings */
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #30363d;
+}
+
+
+.main-content {
+    flex: 1;
+    /* Allow main content to grow */
+    min-width: 400px;
+    /* Background, border, padding inherited from 'aside, main' */
+}
+
+.main-content h2 {
+    /* Your Repositories title */
+    font-size: 20px;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #30363d;
+}
+
+
+/* --- Enhanced Repo Card Styling --- */
+.repo-card {
+    /* Use panel background as base */
+    background-color: #161b22;
+    /* background-color: #21262d; /* Alt: Slightly darker */
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    /* --- Add Subtle Shadow --- */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    /* Added box-shadow transition */
+}
+
+.repo-card.clickable {
+    cursor: pointer;
+}
+
+.repo-card:hover {
+    background-color: #21262d;
+    border-color: #58a6ff;
+    transform: translateY(-2px);
+    /* --- Increase Shadow on Hover --- */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for Repo Card Titles with Icons */
+.repo-card h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #58a6ff;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.repo-card h4 svg {
+    color: #8b949e;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.repo-card p.repo-description {
+    font-size: 13px;
+    color: #8b949e;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: calc(1.5em * 2);
+    line-height: 1.5;
+}
+
+.repo-card p.repo-meta {
+    font-size: 12px;
+    color: #8b949e;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+/* Ensure owner link inherits color */
+.repo-card p.repo-meta .owner-link {
+    color: #8b949e;
+    font-weight: normal;
+}
+
+.repo-card p.repo-meta .owner-link:hover {
+    color: #58a6ff;
+}
+
+/* Search Input */
+#search input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    /* Consistent border */
+    background-color: #0d1117;
+    color: white;
+    margin-bottom: 20px;
+    /* Increased margin */
+    box-sizing: border-box;
+    /* Include padding/border */
+    font-size: 14px;
+}
+
+#search input:focus {
+    outline: none;
+    border-color: #58a6ff;
+    /* Blue border on focus */
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+    /* Subtle blue glow */
+}
+
+/* Message Styles */
+.loading-message,
+.no-items-message {
+    /* Combined loading and no items */
+    color: #8b949e;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.loading-message.small,
+/* Smaller versions for sidebars */
+.no-items-message.small,
+.error-message.small {
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.error-message {
+    /* Only for errors */
+    color: #f85149;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* --- Analog Clock Styles --- */
+.clock-container {
+    display: flex;
+    justify-content: center;
+    /* Center the clock horizontally */
+    align-items: center;
+    margin-bottom: 25px;
+    /* Space below the clock */
+    margin-top: 10px;
+    /* Space above the clock */
+}
+
+.clock {
+    width: 100px;
+    /* Slightly smaller clock */
+    height: 100px;
+    border: 3px solid #58a6ff;
+    /* Thinner border */
+    border-radius: 50%;
+    position: relative;
+    background-color: #0d1117;
+    box-shadow: 0 0 8px rgba(88, 166, 255, 0.2);
+    /* Smaller glow */
+}
+
+.center-nut {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    /* Smaller nut */
+    height: 6px;
+    background-color: #c9d1d9;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.hour-hand,
+.minute-hand,
+.second-hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 100%;
+    /* Rotate around bottom center */
+    transform: translate(-50%, -100%);
+    /* Move up */
+    border-radius: 4px;
+    z-index: 9;
+}
+
+
+.hour-hand {
+    width: 4px;
+    height: 25%;
+    /* Shorter hand */
+    background-color: #c9d1d9;
+}
+
+.minute-hand {
+    width: 3px;
+    height: 35%;
+    background-color: #8b949e;
+}
+
+.second-hand {
+    width: 1px;
+    height: 40%;
+    background-color: #f85149;
+}
+
+
+/* Hour Markings */
+.hour-mark {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    /* Thinner mark */
+    height: 100%;
+    transform-origin: 50% 50%;
+    transform: translateX(-50%);
+}
+
+.hour-mark .mark {
+    width: 100%;
+    height: 4px;
+    /* Shorter mark */
+    background-color: #484f58;
+    position: absolute;
+    top: 2px;
+    left: 0;
+}
+
+.hour-mark:nth-of-type(3n) .mark {
+    height: 6px;
+    /* Slightly longer */
+    top: 1px;
+    background-color: #6e7681;
+}
+
+/* --- End Analog Clock Styles --- */
+
+/* Upcoming Events List */
+.right-panel ul.event-list {
+    /* Target event list specifically */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    /* Smaller font for events */
+}
+
+.right-panel ul.event-list li {
+    margin-bottom: 8px;
+    /* Space between events */
+    padding-bottom: 8px;
+    /* Space below text */
+    border-bottom: 1px solid #30363d;
+    /* Separator */
+    line-height: 1.4;
+}
+
+.right-panel ul.event-list li:last-child {
+    border-bottom: none;
+    /* Remove border on last item */
+}
+
+.right-panel .event-title {
+    color: #c9d1d9;
+    /* Lighter text for title */
+}
+
+.right-panel .event-date {
+    color: #8b949e;
+    /* Grey text for date */
+}
+
+/* --- Add Event Link Styles --- */
+.panel-header-link {
+    display: flex;
+    justify-content: space-between;
+    /* Pushes title left, link right */
+    align-items: center;
+    /* Vertically aligns title and link */
+    border-bottom: 1px solid #30363d;
+    /* Keep border */
+    margin-bottom: 15px;
+    /* Keep margin */
+    padding-bottom: 8px;
+    /* Match h3 padding */
+}
+
+.panel-header-link h3 {
+    margin-bottom: 0;
+    /* Remove margin from h3 */
+    padding-bottom: 0;
+    /* Remove padding from h3 */
+    border-bottom: none;
+    /* Remove border from h3 */
+}
+
+.add-event-link {
+    color: #58a6ff;
+    font-size: 24px;
+    /* Larger plus sign */
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0 5px;
+    /* Click area */
+    border-radius: 4px;
+    line-height: 1;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.add-event-link:hover {
+    background-color: rgba(88, 166, 255, 0.1);
+    /* Subtle blue background */
+    color: #79c0ff;
+    /* Lighter blue */
+    text-decoration: none;
+    /* Remove underline on hover */
+}
+
+/* --- Aesthetic Styles for Repository Cards --- */
+
+.repo-card {
+    /* Base style for a card container */
+    background-color: #161b22;
+    /* Darker than page background for contrast */
+    border: 1px solid #30363d;
+    /* Subtle border */
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* Smooth hover effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* Initial subtle shadow */
+}
+
+.repo-card:hover {
+    transform: translateY(-5px);
+    /* Lift card slightly on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    /* More pronounced shadow */
+    border-color: #58a6ff;
+    /* Highlight border with blue */
+}
+
+.repo-card h4 {
+    color: #58a6ff;
+    /* Repository name in light blue */
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.15em;
+}
+
+.repo-card p {
+    color: #8b949e;
+    /* Grey for description */
+    font-size: 0.95em;
+    margin-bottom: 10px;
+}
+
+.repo-card-meta {
+    /* Container for small metadata like language/stars */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.85em;
+    color: #8b949e;
+}
+
+.repo-card-meta .star-count {
+    display: flex;
+    align-items: center;
+    color: #ffc107;
+    /* Yellow for stars */
+}
+
+/* You may need to import the Star icon for this */
+/* If you use a Star Icon, style it here: */
+/* .repo-card-meta .star-icon { fill: #ffc107; margin-right: 3px; } */
+
+/* --- End Repository Card Styles --- */
