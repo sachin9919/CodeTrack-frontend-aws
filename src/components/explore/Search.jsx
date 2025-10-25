@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+// REMOVED: import axios from 'axios';
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from '../../api/axiosConfig';
 import './explore.css'; // Uses explore.css
 import { RepoIcon } from '@primer/octicons-react'; // Import RepoIcon
 import Spinner from "../Spinner"; // Import Spinner
@@ -23,7 +25,8 @@ const Search = () => {
                 // Search might need auth if it searches private repos in future
                 const token = localStorage.getItem('token');
                 const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-                const response = await axios.get(`http://localhost:3000/api/search?q=${query}`, config);
+                // CORRECTION: Use imported 'api' instance with relative path and query param
+                const response = await api.get(`/search?q=${query}`, config);
                 setResults(response.data);
             } catch (err) {
                 console.error("Error fetching search results:", err); setError(err.response?.data?.error || 'Failed to load search results.'); setResults({ users: [], repositories: [] });

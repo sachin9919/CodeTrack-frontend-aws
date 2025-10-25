@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// REMOVED: import axios from 'axios';
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from '../../api/axiosConfig';
 import './explore.css';
 import { RepoIcon } from '@primer/octicons-react'; // Import RepoIcon
 import Spinner from "../Spinner"; // Import Spinner
@@ -15,8 +17,8 @@ const Explore = () => {
         const fetchPublicRepos = async () => {
             setIsLoading(true); setError('');
             try {
-                // Fetch public repos - no token needed if route is public
-                const response = await axios.get('http://localhost:3000/api/repo/public');
+                // CORRECTION: Use imported 'api' instance with relative path
+                const response = await api.get('/repo/public');
                 if (response.data && Array.isArray(response.data)) { setPublicRepos(response.data); }
                 else { console.warn("Received non-array data:", response.data); setPublicRepos([]); }
             } catch (err) {

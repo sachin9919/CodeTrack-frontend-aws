@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// REMOVED: import axios from 'axios';
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from '../../api/axiosConfig';
 import './events.css'; // Import the CSS
 import Spinner from '../Spinner'; // Import Spinner for loading state
 
@@ -41,8 +43,9 @@ const CreateEvent = () => {
                 }
             };
 
-            const response = await axios.post(
-                'http://localhost:3000/api/events/create',
+            // CORRECTION: Use imported 'api' instance with relative path
+            const response = await api.post(
+                '/events/create',
                 { title, eventDate }, // Send title and date string
                 config
             );

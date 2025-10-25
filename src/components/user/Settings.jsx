@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// REMOVED: import axios from 'axios';
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from '../../api/axiosConfig';
 import './settings.css';
 
 const Settings = () => {
@@ -19,12 +21,11 @@ const Settings = () => {
             const fetchUserData = async () => {
                 try {
                     const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-                    // Fetch user profile (which now includes avatarUrl)
-                    const response = await axios.get(`http://localhost:3000/api/user/userProfile/${userId}`, config);
+                    // CORRECTION: Use imported 'api' instance with relative path
+                    const response = await api.get(`/user/userProfile/${userId}`, config);
                     if (response.data) {
                         setCurrentUser(response.data);
                         setFormData(prev => ({ ...prev, email: response.data.email || '' }));
-                        // FIX 1: Ensure localStorage is in sync on load
                         localStorage.setItem('avatarUrl', response.data.avatarUrl || '');
                     } else { setError('Received invalid user data.'); }
                 } catch (err) { setError('Failed to fetch user data.'); console.error("Fetch user data error:", err); }
@@ -61,7 +62,8 @@ const Settings = () => {
             const payload = { email: formData.email };
             if (formData.newPassword) { payload.password = formData.newPassword; }
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const response = await axios.put(`http://localhost:3000/api/user/updateProfile/${userId}`, payload, config);
+            // CORRECTION: Use imported 'api' instance with relative path
+            const response = await api.put(`/user/updateProfile/${userId}`, payload, config);
             if (response.data) {
                 setMessage('Profile details updated successfully!');
                 setCurrentUser(prev => ({ ...prev, email: response.data.email }));
@@ -81,19 +83,15 @@ const Settings = () => {
             avatarFormData.append('avatar', avatarFile);
             try {
                 const config = { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } };
-                const response = await axios.put(`http://localhost:3000/api/user/updateAvatar`, avatarFormData, config);
+                // CORRECTION: Use imported 'api' instance with relative path
+                const response = await api.put(`/user/updateAvatar`, avatarFormData, config);
 
                 if (response.data?.user?.avatarUrl) {
                     const newAvatarUrl = response.data.user.avatarUrl;
                     setMessage(prev => prev ? prev + ' Avatar updated!' : 'Avatar updated successfully!');
                     setCurrentUser(prev => ({ ...prev, avatarUrl: newAvatarUrl }));
-
-                    // FIX 2: Update localStorage with the new URL
                     localStorage.setItem('avatarUrl', newAvatarUrl);
-
-                    // FIX 3: Fire a custom event to notify other components (like Navbar)
                     window.dispatchEvent(new Event('avatarUpdated'));
-
                     setAvatarFile(null);
                     if (document.getElementById('avatar')) document.getElementById('avatar').value = '';
                 }
@@ -118,14 +116,12 @@ const Settings = () => {
                     <h2>Account Settings</h2>
 
                     {/* Display current avatar */}
-                    {/* FIX 4: Use currentUser.avatarUrl to display image */}
                     {currentUser?.avatarUrl ? (
                         <div className="avatar-preview">
                             <img src={currentUser.avatarUrl} alt="Current Avatar" />
                         </div>
                     ) : (
                         <div className="avatar-preview">
-                            {/* You can put a default placeholder icon here */}
                             <div className="profile-image-placeholder" style={{ width: '100px', height: '100px', borderRadius: '50%', backgroundColor: '#555', margin: '0 auto' }}></div>
                         </div>
                     )}

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// REMOVED: import axios from 'axios';
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from '../../api/axiosConfig';
 import '../explore/explore.css'; // Re-use the CSS from the Explore page
+import { RepoIcon } from '@primer/octicons-react'; // Import RepoIcon
+import Spinner from '../Spinner'; // Import Spinner
 
 const Stars = () => {
     const [starredRepos, setStarredRepos] = useState([]);
@@ -25,8 +29,8 @@ const Stars = () => {
 
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                // Use the API endpoint we created earlier
-                const response = await axios.get(`http://localhost:3000/api/user/${userId}/starred`, config);
+                // CORRECTION: Use imported 'api' instance with relative path
+                const response = await api.get(`/user/${userId}/starred`, config);
 
                 if (response.data && Array.isArray(response.data)) {
                     setStarredRepos(response.data);
@@ -51,7 +55,7 @@ const Stars = () => {
         <div className="explore-page-container">
             <h2>Your Starred Repositories</h2>
 
-            {isLoading && <p className="loading-message">Loading repositories...</p>}
+            {isLoading && <Spinner />} {/* Use Spinner component */}
             {error && <p className="error-message">Error: {error}</p>}
 
             {!isLoading && !error && starredRepos.length === 0 && (
@@ -67,7 +71,8 @@ const Stars = () => {
                             onClick={() => navigate(`/repo/${repo._id}`)}
                             title={`View repository: ${repo.name}`}
                         >
-                            <h4>{repo.name}</h4>
+                            {/* Added Icon */}
+                            <h4><RepoIcon size={16} verticalAlign="middle" /> {repo.name}</h4>
                             <p className="repo-description">{repo.description || 'No description provided.'}</p>
                             <div className="repo-meta-explore">
                                 <span className="repo-owner">

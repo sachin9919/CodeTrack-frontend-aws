@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+// REMOVED: import axios from "axios";
 // IMPORT THE NEW CENTRAL API CONFIG
 import api from "../../api/axiosConfig";
 import "./dashboard.css";

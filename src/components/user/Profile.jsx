@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
-import axios from "axios";
+// REMOVED: import axios from "axios";
+// IMPORT THE NEW CENTRAL API CONFIG
+import api from "../../api/axiosConfig";
 import "./profile.css";
 import { UnderlineNav } from "@primer/react";
 import { BookIcon, RepoIcon } from "@primer/octicons-react"; // RepoIcon imported
@@ -32,7 +34,8 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-      const response = await axios.get(`http://localhost:3000/api/user/userProfile/${profileUserId}`, config);
+      // CORRECTION: Use imported 'api' instance with relative path
+      const response = await api.get(`/user/userProfile/${profileUserId}`, config);
       console.log("Fetched user details:", response.data, `Received followerCount: ${response.data?.followerCount}`);
       if (response.data && response.data._id) { return response.data; }
       else { setError('Received invalid user data.'); return null; }
@@ -68,7 +71,8 @@ const Profile = () => {
         try {
           const token = localStorage.getItem('token');
           const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-          const response = await axios.get(`http://localhost:3000/api/user/${profileUserId}/starred`, config);
+          // CORRECTION: Use imported 'api' instance with relative path
+          const response = await api.get(`/user/${profileUserId}/starred`, config);
           setStarredRepos(response.data || []);
         } catch (err) {
           console.error("Cannot fetch starred repos: ", err);
@@ -95,11 +99,12 @@ const Profile = () => {
     if (!loggedInUserId || loggedInUserId === profileUserId) return;
     setFollowLoading(true); setError('');
     const action = isFollowing ? 'unfollow' : 'follow';
-    const url = `http://localhost:3000/api/user/${action}/${profileUserId}`;
+    // CORRECTION: Use imported 'api' instance with relative path
+    const url = `/user/${action}/${profileUserId}`;
     const token = localStorage.getItem('token');
     try {
       const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-      const response = await axios.post(url, {}, config);
+      const response = await api.post(url, {}, config); // Use api.post
       if (response.data) {
         console.log(response.data.message);
         // Refresh profile details to get updated follower count and isFollowing status
@@ -118,20 +123,17 @@ const Profile = () => {
 
   // --- Render Loading State ---
   if (isLoading) {
-    // Optional: Use a full page overlay spinner for initial load
-    // return <div className="page-loading-overlay"><Spinner /></div>;
-    return <Spinner />; // Or just the regular spinner
+    return <Spinner />;
   }
 
   // --- Render Error State (if main profile load failed) ---
-  // We check !userDetails because error might be set from a failed starred repo fetch later
   if (error && !userDetails) {
     return <div className="error-message page-error">
       {`Error: ${error || 'Could not load user profile.'}`}
-    </div>; // Added class
+    </div>;
   }
 
-  // --- Render Null if no user details (shouldn't happen if not loading/error) ---
+  // --- Render Null if no user details ---
   if (!userDetails) {
     return null;
   }
@@ -201,8 +203,6 @@ const Profile = () => {
           </div>
           <div className="name">
             <h3>{userDetails.username}</h3>
-            {/* Add real name if available */}
-            {/* <p>Your Real Name</p> */}
           </div>
           {!isOwnProfile && (
             <button
@@ -214,8 +214,6 @@ const Profile = () => {
             </button>
           )}
           <div className="follower">
-            {/* Use Link component if you want these to go somewhere */}
-            {/* Example: <Link to={`/users/${profileUserId}/followers`}><p><strong>{userDetails.followerCount ?? 0}</strong> Followers</p></Link> */}
             <p><strong>{userDetails.followerCount ?? 0}</strong> Followers</p>
             <p><strong>{userDetails.followingCount ?? 0}</strong> Following</p>
           </div>
