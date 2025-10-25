@@ -1,10 +1,15 @@
 .right-sidebar {
     width: 250px;
-    height: 100vh;
+    /* --- CORRECTION START --- */
+    height: calc(100vh - 70px);
+    /* Make height fill remaining space under navbar */
     background-color: #161b22;
     color: white;
     position: fixed;
-    top: 0;
+    top: 70px;
+    /* Start below the 70px navbar */
+    /* --- CORRECTION END --- */
+
     /* Explicitly define starting position */
     right: -260px;
     /* Ensure transition is defined */
