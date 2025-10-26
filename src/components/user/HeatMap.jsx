@@ -20,10 +20,20 @@ const HeatMapProfile = () => {
           const token = localStorage.getItem('token');
           const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
 
-          // --- CORRECTION: Use api.get and relative URL ---
+          // --- NEW: Get client's timezone offset in minutes ---
+          // A positive value (e.g., -330 for India) means the local time is BEHIND UTC.
+          // A negative value means local time is AHEAD of UTC.
+          // We will send this to the backend.
+          const timezoneOffset = new Date().getTimezoneOffset();
+
+          // --- CORRECTION: Use api.get and send timezoneOffset as a query param ---
           const response = await api.get(
             `/user/${profileUserId}/contributions`,
-            config
+            {
+              ...config,
+              // Send the offset as a query parameter
+              params: { timezoneOffset }
+            }
           );
 
           console.log("DEBUG: Received contribution data:", response.data);
