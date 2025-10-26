@@ -5,11 +5,13 @@
     color: white;
     position: fixed;
     top: 0;
+    /* --- CORRECTION START --- */
     /* Explicitly define starting position */
-    right: -260px;
+    right: 0;
+    transform: translateX(100%);
     /* Ensure transition is defined */
-    transition: right 0.3s ease-in-out;
-    /* Changed timing function slightly */
+    transition: transform 0.3s ease-in-out;
+    /* --- CORRECTION END --- */
     padding: 20px;
     z-index: 1001;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
@@ -19,8 +21,10 @@
 }
 
 .right-sidebar.open {
+    /* --- CORRECTION START --- */
     /* Explicitly define ending position */
-    right: 0;
+    transform: translateX(0);
+    /* --- CORRECTION END --- */
 }
 
 .right-sidebar .close-btn {

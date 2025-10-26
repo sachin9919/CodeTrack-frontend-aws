@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HeatMap from "@uiw/react-heat-map";
-import axios from "axios";
+// --- CORRECTION: Import 'api' instead of 'axios' ---
+import api from "../../api/axiosConfig";
 import { useParams } from "react-router-dom";
 
 const HeatMapProfile = () => {
@@ -19,9 +20,9 @@ const HeatMapProfile = () => {
           const token = localStorage.getItem('token');
           const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
 
-          // Call our API endpoint
-          const response = await axios.get(
-            `http://localhost:3000/api/user/${profileUserId}/contributions`,
+          // --- CORRECTION: Use api.get and relative URL ---
+          const response = await api.get(
+            `/user/${profileUserId}/contributions`,
             config
           );
 

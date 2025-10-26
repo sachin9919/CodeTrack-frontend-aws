@@ -5,11 +5,13 @@
     color: white;
     position: fixed;
     top: 0;
+    /* --- CORRECTION START --- */
     /* Explicitly define starting position */
-    left: -260px;
+    left: 0;
+    transform: translateX(-100%);
     /* Ensure transition is defined */
-    transition: left 0.3s ease-in-out;
-    /* Changed timing function slightly */
+    transition: transform 0.3s ease-in-out;
+    /* --- CORRECTION END --- */
     padding: 20px;
     z-index: 1001;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
@@ -19,8 +21,10 @@
 }
 
 .sidebar.open {
+    /* --- CORRECTION START --- */
     /* Explicitly define ending position */
-    left: 0;
+    transform: translateX(0);
+    /* --- CORRECTION END --- */
 }
 
 .sidebar .close-btn {
@@ -116,5 +120,4 @@
 .no-results {
     color: #8b949e;
     font-size: 14px;
-    padding: 10px 5px;
-}
+    padding: 10px 5px;   }
