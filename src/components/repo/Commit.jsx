@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import api from "../../api/axiosConfig"; // IMPORTED CENTRAL API
 import "./repo.css"; // Assuming shared repo CSS
 
 const Commit = () => {
     const { id: repoId } = useParams(); // Use repoId for clarity
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
-    // FIX 1: Add state for the content textarea
     const [content, setContent] = useState("");
     const [error, setError] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,9 +16,9 @@ const Commit = () => {
         setIsSubmitting(true);
 
         const commitMessage = message.trim();
-        const fileContent = content; // Get content state
+        const fileContent = content;
         const userId = localStorage.getItem("userId");
-        const token = localStorage.getItem('token'); // Get token for auth
+        const token = localStorage.getItem('token');
 
         if (!commitMessage) {
             setError("Commit message cannot be empty");
@@ -32,36 +32,36 @@ const Commit = () => {
         }
 
         try {
+            // Setup headers for authenticated request
             const config = {
-                method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    message: commitMessage,
-                    userId: userId,
-                    // FIX 2: Send the content state in the request body
-                    content: fileContent,
-                }),
+                    // 'Content-Type' is already set in api config
+                    'Authorization': `Bearer ${token}`
+                }
             };
-            // Add Authorization header if token exists
-            if (token) {
-                config.headers['Authorization'] = `Bearer ${token}`;
-            }
 
-            const response = await fetch(`http://localhost:3000/api/repo/${repoId}/commit`, config);
-            const result = await response.json();
+            // Data payload
+            const payload = {
+                message: commitMessage,
+                userId: userId,
+                content: fileContent,
+            };
 
-            if (response.ok) {
-                console.log("Commit successful:", result);
-                // Optionally show success message before navigating
+            // --- CORRECTION: Use api.post and relative URL ---
+            const response = await api.post(`/repo/${repoId}/commit`, payload, config);
+
+            // Axios response check (status 200 or 201 is usually success)
+            if (response.status === 200 || response.status === 201) {
+                console.log("Commit successful:", response.data);
                 navigate(`/repo/${repoId}`); // Navigate back to repo details
             } else {
-                setError(result.error || result.message || "Commit failed");
+                // This else might not be hit if Axios throws on bad status
+                setError(response.data.error || response.data.message || "Commit failed");
             }
         } catch (err) {
             console.error("Commit error:", err);
-            setError("Error communicating with the server during commit.");
+            // Axios error structure
+            setError(err.response?.data?.error || err.message || "Error communicating with the server.");
         } finally {
             setIsSubmitting(false);
         }
@@ -84,7 +84,7 @@ const Commit = () => {
                 />
             </div>
 
-            {/* FIX 3: Add Textarea for Content */}
+            {/* Textarea for Content */}
             <div className="form-group">
                 <label htmlFor="commit-content">File Content (e.g., README)</label>
                 <textarea
